@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Mis 15 Años - Mariana</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --maroon-1: #3e0f09;
+      --maroon-2: #2a0906;
+      --ivory-1: #fffaf0;
+      --ivory-2: #fdf3e2;
+      --gold-1: #f8ecc4;
+      --gold-2: #e6c674;
+      --gold-3: #caa24a;
+      --label: #9c7a2e;
+      --red-1: #9c1f2e;
+      --red-2: #7a1522;
+      --red-deep: #5c0f1a;
+      --red-bright: #b3283a;
+      --ink: #7a1522;
+      --ink-soft: #6b3a2c;
+      --shadow: rgba(20, 6, 3, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(ellipse 80% 42% at 50% 0%, rgba(150, 40, 25, 0.35), transparent 62%),
+        radial-gradient(ellipse 70% 42% at 50% 100%, rgba(10, 3, 2, 0.55), transparent 58%),
+        var(--maroon-1);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .moving-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,246,214,1) 0%, rgba(230,198,116,0.9) 42%, transparent 76%);
+      box-shadow:
+        0 0 8px rgba(230,198,116,0.85),
+        0 0 16px rgba(202, 162, 74, 0.5);
+      animation: twinkle 3.2s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    .sparkle.s1 { left: 12%; top: 8%; }
+    .sparkle.s2 { right: 14%; top: 16%; width: 8px; height: 8px; animation-delay: .8s; }
+    .sparkle.s3 { left: 18%; top: 46%; animation-delay: 1.4s; }
+    .sparkle.s4 { right: 10%; top: 58%; width: 7px; height: 7px; animation-delay: .5s; }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 590px;
+      margin: 0 auto;
+      padding: 0 14px 30px;
+    }
+
+    /* ---------- Divider (replaces the star-row ornament) ---------- */
+    .divider {
+      position: relative;
+      width: 100%;
+      max-width: 260px;
+      height: 22px;
+      margin: 18px auto;
+    }
+
+    .divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(156, 31, 46, 0.5), transparent);
+      transform: translateY(-50%);
+    }
+
+    .divider .gem {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-3));
+      box-shadow: 0 0 9px rgba(202, 162, 74, 0.75);
+    }
+
+    .divider.on-dark::before { background: linear-gradient(90deg, transparent, rgba(230, 198, 116, 0.55), transparent); }
+
+    /* ---------- Mask on the dark maroon canvas ---------- */
+    .mask-hero {
+      padding: 30px 10px 4px;
+      text-align: center;
+      position: relative;
+    }
+
+    .mask-hero-frame {
+      position: relative;
+      width: min(100%, 560px);
+      margin: 0 auto -8px;
+    }
+
+    .mask-glow {
+      position: absolute;
+      inset: 8% 4%;
+      background: radial-gradient(circle, rgba(230, 198, 116, 0.30), transparent 68%);
+      filter: blur(26px);
+      z-index: 0;
+      animation: glowHalo 5s ease-in-out infinite;
+    }
+
+    .mask-hero-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: block;
+      filter: drop-shadow(0 16px 30px rgba(10, 3, 2, 0.5));
+      animation: floatMask 5.2s ease-in-out infinite;
+    }
+
+    .scroll-cue {
+      margin: 4px auto 0;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold-2);
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .scroll-cue .mouse {
+      width: 26px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(230, 198, 116, 0.6);
+      position: relative;
+    }
+
+    .scroll-cue .mouse::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 4px;
+      height: 8px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: rgba(230, 198, 116, 0.85);
+      animation: scrollDot 1.6s ease-in-out infinite;
+    }
+
+    /* ---------- Content card ---------- */
+    .paper {
+      position: relative;
+      border-radius: 30px;
+      background: linear-gradient(180deg, var(--ivory-1), var(--ivory-2) 60%, var(--ivory-1));
+      border: 1px solid rgba(202, 162, 74, 0.45);
+      box-shadow:
+        0 26px 60px rgba(10, 3, 2, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      padding: 26px 18px 32px;
+    }
+
+    .card-corner {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      pointer-events: none;
+      opacity: 0.75;
+      border: 1.4px solid var(--gold-3);
+    }
+
+    .card-corner.tl { top: 14px; left: 14px; border-right: 0; border-bottom: 0; }
+    .card-corner.tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; }
+    .card-corner.bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; }
+    .card-corner.br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; }
+
+    .inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .section-kicker,
+    .small-label {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--label);
+      font-size: 1.02rem;
+    }
+
+    .card-kicker {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--label);
+      font-size: 1.02rem;
+    }
+
+    .name {
+      font-family: "Alex Brush", cursive;
+      font-style: italic;
+      font-size: clamp(3.6rem, 13vw, 5.4rem);
+      font-weight: 600;
+      line-height: 0.92;
+      margin: 4px 0 0;
+      color: var(--red-2);
+      text-shadow: 0 1px 10px rgba(230, 198, 116, 0.3);
+      max-width: 92%;
+      margin-left: auto;
+      margin-right: auto;
+      text-wrap: balance;
+    }
+
+    .name .cap { font-size: 1.10em; }
+
+    .full-name {
+      margin-top: 4px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--label);
+    }
+
+    .cover-invitee-label {
+      margin-top: 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    .cover-invitee-name {
+      margin-top: 3px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.86rem;
+      font-weight: 700;
+      color: var(--red-2);
+      line-height: 1.05;
+    }
+
+    .hero-text,
+    .body-text,
+    .helper,
+    .detail-sub {
+      color: var(--ink-soft);
+      line-height: 1.8;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    .hero-text {
+      max-width: 380px;
+      margin: 14px auto 0;
+      font-size: 1.16rem;
+      line-height: 1.5;
+    }
+
+    .hero-closing {
+      max-width: 340px;
+      margin: 12px auto 0;
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 1.14rem;
+      color: var(--red-1);
+    }
+
+    .section {
+      padding: 2px 0;
+      text-align: center;
+    }
+
+    .detail-stack {
+      display: grid;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .detail-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    .detail-main {
+      margin-top: 6px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.02rem;
+      font-weight: 600;
+      line-height: 1.18;
+      color: var(--red-2);
+    }
+
+    .detail-sub {
+      margin-top: 5px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .event-date {
+      font-family: "Cinzel Decorative", serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      color: var(--red-2);
+    }
+
+    .countdown {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .count-number {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.95rem;
+      font-weight: 700;
+      color: var(--red-2);
+      line-height: 1;
+    }
+
+    .count-label {
+      margin-top: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    .button-row {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .soft-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 1.02rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .soft-btn:active { transform: scale(0.985); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red-1), var(--red-deep));
+      color: var(--ivory-1);
+      border: 1px solid rgba(202, 162, 74, 0.5);
+      box-shadow: 0 12px 24px rgba(92, 15, 26, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--ivory-1);
+      color: var(--red-1);
+      border: 1px solid rgba(156, 31, 46, 0.4);
+    }
+
+    .dress-line {
+      margin-top: 14px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .dress-main {
+      margin-top: 4px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--red-2);
+    }
+
+    .dress-sub {
+      margin-top: 4px;
+      color: var(--ink-soft);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+
+    .envelope-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      margin: 14px auto 0;
+      border-radius: 50%;
+      color: var(--red-1);
+      background: radial-gradient(circle at 30% 30%, rgba(255,253,246,0.95), rgba(240,214,180,0.55) 45%, rgba(156,31,46,0.35) 100%);
+      border: 1px solid rgba(156, 31, 46, 0.5);
+      box-shadow: inset 0 1px 0 rgba(255,253,246,0.8), 0 10px 20px rgba(92, 15, 26, 0.25);
+    }
+
+    .map-frame-wrap {
+      margin-top: 14px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(156, 31, 46, 0.35);
+      box-shadow: 0 12px 26px rgba(92, 15, 26, 0.2);
+    }
+
+    .map-frame-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 270px;
+      border: 0;
+    }
+
+    .rsvp-confirm-box {
+      margin-top: 18px;
+      padding: 18px 16px;
+      border-radius: 22px;
+      background: rgba(122, 21, 34, 0.05);
+      border: 1px solid rgba(156, 31, 46, 0.25);
+      text-align: center;
+    }
+
+    .rsvp-name-line {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: var(--red-2);
+    }
+
+    .rsvp-name-line strong {
+      font-size: 1.32em;
+      font-weight: 700;
+      color: var(--red-deep);
+    }
+
+    .rsvp-question {
+      margin-top: 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.22rem;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .rsvp-options {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+      text-align: left;
+    }
+
+    .rsvp-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(156, 31, 46, 0.3);
+      background: var(--ivory-1);
+      cursor: pointer;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.1rem;
+      color: var(--red-2);
+    }
+
+    .rsvp-option input {
+      accent-color: var(--red-1);
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      flex: 0 0 auto;
+    }
+
+    .rsvp-submit {
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      margin-top: 14px;
+      background: linear-gradient(135deg, var(--red-1), var(--red-deep));
+      color: var(--ivory-1);
+      border: 1px solid rgba(202, 162, 74, 0.5);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 24px rgba(92, 15, 26, 0.32);
+    }
+
+    .rsvp-status {
+      margin-top: 10px;
+      min-height: 22px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.06rem;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Open overlay ---------- */
+    .open-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 26px 20px;
+      background:
+        radial-gradient(ellipse 80% 45% at 50% 0%, rgba(150, 40, 25, 0.35), transparent 60%),
+        var(--maroon-1);
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .open-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(1.02);
+    }
+
+    .open-frame {
+      position: relative;
+      width: min(100%, 400px);
+      margin: 0 auto;
+      animation: cardFloat 4.6s ease-in-out infinite;
+    }
+
+    .rose-corner {
+      position: absolute;
+      z-index: 4;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.22));
+    }
+
+    .open-mask-wrap {
+      position: relative;
+      width: 62%;
+      margin: 0 auto -6px;
+      z-index: 2;
+    }
+
+    .open-mask-wrap img { width: 100%; display: block; filter: drop-shadow(0 10px 18px rgba(10,3,2,0.5)); }
+
+    .open-card-wrap {
+      position: relative;
+    }
+
+    .open-card-wrap .rose-tl { top: 50%; left: -32px; transform: translateY(-50%); width: min(22vw, 96px); }
+    .open-card-wrap .rose-tr { top: 50%; right: -32px; transform: translateY(-50%); width: min(22vw, 96px); }
+
+    .open-card {
+      position: relative;
+      z-index: 1;
+      padding: 26px 22px 28px;
+      border-radius: 28px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--ivory-1), var(--ivory-2));
+      border: 1px solid rgba(202, 162, 74, 0.5);
+      box-shadow: 0 26px 56px rgba(10, 3, 2, 0.5), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    .open-title {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--label);
+      font-size: 1rem;
+    }
+
+    .open-name {
+      margin-top: 4px;
+      font-family: "Alex Brush", cursive;
+      font-style: italic;
+      font-size: clamp(3.2rem, 15vw, 4.6rem);
+      font-weight: 600;
+      line-height: 0.95;
+      color: var(--red-2);
+      text-shadow: 0 1px 10px rgba(230, 198, 116, 0.3);
+    }
+
+    .open-name .cap { font-size: 1.10em; }
+
+    .open-invitee-label {
+      margin-top: 10px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    .open-invitee-name {
+      margin-top: 5px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.94rem;
+      font-weight: 700;
+      color: var(--red-2);
+      line-height: 1.05;
+    }
+
+    .open-btn {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 12px 26px;
+      border: 1px solid rgba(202, 162, 74, 0.6);
+      border-radius: 999px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--red-1), var(--red-deep));
+      color: var(--ivory-1);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      box-shadow: 0 14px 28px rgba(92, 15, 26, 0.35);
+    }
+
+    .page-content {
+      transition:
+        opacity 0.95s cubic-bezier(.22,1,.36,1),
+        transform 0.95s cubic-bezier(.22,1,.36,1),
+        filter 0.95s cubic-bezier(.22,1,.36,1);
+      transform-origin: center top;
+    }
+
+    .page-content.pre-open {
+      opacity: 0;
+      transform: translateY(42px) scale(0.985);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .page-content.opened {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .page-content.opened .mask-hero {
+      animation: stageRise 1s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .page-content.opened .paper {
+      animation: paperLift 1.08s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* ---------- Footer signature with rose corners ---------- */
+    .footer-frame {
+      position: relative;
+      padding: 44px 12px 12px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .footer-frame .rose-bl { left: -20px; bottom: -14px; width: min(40vw, 190px); }
+    .footer-frame .rose-br { right: -20px; bottom: -14px; width: min(40vw, 190px); }
+
+    .footer-signature {
+      position: relative;
+      z-index: 2;
+      padding: 0 58px;
+    }
+
+    .footer-name {
+      margin: 0;
+      font-family: "Alex Brush", cursive;
+      font-size: clamp(1.7rem, 7vw, 3.1rem);
+      color: var(--gold-1);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.4);
+    }
+
+    .footer-sub {
+      margin-top: 2px;
+      font-family: "Cormorant Garamond", serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--gold-2);
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes stageRise {
+      0% { opacity: 0; transform: translateY(30px) scale(0.985); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes paperLift {
+      0% { opacity: 0; transform: translateY(50px) scale(0.985); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); }
+      50% { opacity: 0.9; transform: scale(1.15); }
+    }
+
+    @keyframes glowHalo {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
+
+    @keyframes floatMask {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes scrollDot {
+      0% { opacity: 0; transform: translateX(-50%) translateY(0); }
+      25% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(-50%) translateY(14px); }
+    }
+
+    @media (max-width: 639px) {
+      .mask-hero { padding-top: 20px; }
+      .open-card-wrap .rose-tl, .open-card-wrap .rose-tr { width: min(18vw, 78px); }
+      .open-card-wrap .rose-tl { left: -22px; }
+      .open-card-wrap .rose-tr { right: -22px; }
+      .footer-frame .rose-bl, .footer-frame .rose-br { width: min(30vw, 120px); }
+      .footer-signature { padding: 0 42px; }
+      .map-frame-wrap iframe { height: 236px; }
+    }
+
+    @media (min-width: 640px) {
+      .shell { max-width: 760px; padding: 0 22px 50px; }
+      .paper { padding: 34px 30px 36px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-up { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body class="pre-open-state">
+  <div class="moving-bg" aria-hidden="true">
+    <span class="sparkle s1"></span>
+    <span class="sparkle s2"></span>
+    <span class="sparkle s3"></span>
+    <span class="sparkle s4"></span>
+  </div>
+
+  <div id="openOverlay" class="open-overlay">
+    <div class="open-frame">
+      <div class="open-mask-wrap">
+        <img src="assets/mask.png" alt="" aria-hidden="true">
+      </div>
+
+      <div class="open-card-wrap">
+        <img class="rose-corner rose-tl" src="assets/corner-top-left.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-tr" src="assets/corner-top-right.png" alt="" aria-hidden="true">
+
+        <div class="open-card">
+          <div class="open-title">Mis 15 años</div>
+          <div class="open-name">
+            <span class="cap">M</span>ariana
+          </div>
+          <div class="open-invitee-label">Invitación para</div>
+          <div id="overlayGuestName" class="open-invitee-name">Invitado especial</div>
+          <button id="openInviteBtn" class="open-btn" type="button">Abrir invitación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="pageContent" class="shell page-content pre-open">
+    <section class="mask-hero fade-up">
+      <div class="mask-hero-frame">
+        <div class="mask-glow" aria-hidden="true"></div>
+        <img class="mask-hero-img" src="assets/mask.png" alt="Antifaz de gala" />
+      </div>
+      <div class="scroll-cue" aria-hidden="true">
+        <div class="mouse"></div>
+        <span>Desliza</span>
+      </div>
+    </section>
+
+    <article class="paper">
+      <span class="card-corner tl"></span>
+      <span class="card-corner tr"></span>
+      <span class="card-corner bl"></span>
+      <span class="card-corner br"></span>
+
+      <div class="inner">
+        <section class="fade-up" style="text-align:center;">
+          <div class="card-kicker">Mis 15 años</div>
+          <h1 class="name">
+            <span class="cap">M</span>ariana
+          </h1>
+          <div class="full-name">Mariana Arboleda Apolinar</div>
+
+          <div class="cover-invitee-label">Invitación para</div>
+          <div id="coverGuestName" class="cover-invitee-name">Invitado especial</div>
+
+          <p class="hero-text">
+            Érase una vez... en un reino donde la elegancia es eterna y los sueños se convierten en memorias inolvidables, una joven dama está por abrir las puertas de una nueva etapa en su historia. Esta noche, los salones se visten de gala, las máscaras guardan el misterio y la música da vida a una celebración digna de la realeza.
+          </p>
+          <p class="hero-closing">
+            Con todo su cariño, sus padres te invitan a acompañarla y celebrar juntos esta noche tan especial.
+          </p>
+        </section>
+
+        <div class="divider fade-up"><span class="gem"></span></div>
+
+        <section class="section fade-up">
+          <div class="section-kicker">Detalles del evento</div>
+          <div class="detail-stack">
+            <div>
+              <div class="detail-title">Fecha</div>
+              <div class="event-date">12 de septiembre de 2026</div>
+            </div>
+            <div>
+              <div class="detail-title">Hora</div>
+              <div class="detail-main">7:00 p. m.</div>
+            </div>
+            <div>
+              <div class="detail-title">Lugar</div>
+              <div class="detail-main">NQ Hotel Orinoquia</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider fade-up"><span class="gem"></span></div>
+
+        <section class="section fade-up">
+          <div class="section-kicker">Cuenta regresiva</div>
+          <p class="helper">Tan solo faltan...</p>
+          <div class="countdown">
+            <div>
+              <div id="days" class="count-number">00</div>
+              <div class="count-label">Días</div>
+            </div>
+            <div>
+              <div id="hours" class="count-number">00</div>
+              <div class="count-label">Horas</div>
+            </div>
+            <div>
+              <div id="minutes" class="count-number">00</div>
+              <div class="count-label">Minutos</div>
+            </div>
+            <div>
+              <div id="seconds" class="count-number">00</div>
+              <div class="count-label">Segundos</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider fade-up"><span class="gem"></span></div>
+
+        <section class="section fade-up">
+          <div class="section-kicker">Cómo llegar</div>
+          <p class="body-text" style="font-size:1.06rem; line-height:1.62; font-family:'Cormorant Garamond',serif; color:var(--ink-soft);">Abre la ruta desde tu celular y llega fácil a la celebración en NQ Hotel Orinoquia.</p>
+
+          <div class="map-frame-wrap">
+            <iframe src="https://www.google.com/maps?q=NQ+HOTEL+ORINOQUIA,4.1329715,-73.5437174&z=16&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+          <div class="button-row">
+            <a id="mapsBtn" href="https://www.google.com/maps/place/NQ+HOTEL+ORINOQUIA/@4.1329722,-73.5437164,984m/data=!3m1!1e3!4m9!3m8!1s0x8e3e29510d7a369d:0x40bf4d91d2cf2323!5m2!4m1!1i2!8m2!3d4.1329715!4d-73.5437174!16s%2Fg%2F11qp2mccnk" target="_blank" rel="noopener noreferrer" class="soft-btn btn-primary">Abrir en Google Maps</a>
+            <a id="wazeBtn" href="https://ul.waze.com/ul?ll=4.1329715%2C-73.5437174&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" rel="noopener noreferrer" class="soft-btn btn-secondary">Abrir en Waze</a>
+          </div>
+        </section>
+
+        <div class="divider fade-up"><span class="gem"></span></div>
+
+        <section class="section fade-up">
+          <div class="section-kicker">Lluvia de sobres</div>
+          <div class="envelope-mark">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7.5 12 14l9-6.5"/>
+              <rect x="3" y="6" width="18" height="12" rx="2"/>
+            </svg>
+          </div>
+        </section>
+
+        <div class="divider fade-up"><span class="gem"></span></div>
+
+        <section class="section fade-up">
+          <div class="section-kicker">Dress code</div>
+          <div class="dress-line">
+            <div>
+              <div class="dress-main">Formal blanco</div>
+              <div class="dress-sub">Te invitamos a vestir de blanco con elegancia para esta noche tan especial</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider fade-up"><span class="gem"></span></div>
+
+        <section class="section fade-up">
+          <div class="section-kicker">Confirmación</div>
+          <div class="detail-main" style="margin-top:12px; font-size:1.5rem;">Esperamos contar con tu grata compañía</div>
+          <p class="body-text" style="font-size:1.2rem; line-height:1.68; font-family:'Cormorant Garamond',serif; color:var(--ink-soft);">
+            Agradecemos que nos confirmes tu asistencia para reservar tu lugar y acompañarnos en esta celebración tan especial.
+          </p>
+
+          <form id="rsvpForm">
+            <div class="rsvp-confirm-box">
+              <div class="rsvp-name-line">
+                <strong id="guestNameDisplay">Invitado especial</strong>
+              </div>
+              <div class="rsvp-question">
+                ¿Nos acompañarás en esta fecha tan especial?
+              </div>
+
+              <div class="rsvp-options">
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance" value="Sí asistiré" required>
+                  <span>Sí, asistiré</span>
+                </label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance" value="No podré asistir" required>
+                  <span>No, no podré asistir</span>
+                </label>
+              </div>
+
+              <button class="rsvp-submit" type="submit">Confirmar por WhatsApp</button>
+              <div id="rsvpStatus" class="rsvp-status"></div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </article>
+
+    <div class="footer-frame fade-up">
+      <img class="rose-corner rose-bl" src="assets/corner-bottom-left.png" alt="" aria-hidden="true">
+      <img class="rose-corner rose-br" src="assets/corner-bottom-right.png" alt="" aria-hidden="true">
+      <div class="footer-signature">
+        <div class="divider on-dark"><span class="gem"></span></div>
+        <p class="footer-name">Mariana Arboleda Apolinar</p>
+        <p class="footer-sub">Mis 15 años · 12 de septiembre de 2026</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Reemplaza este número por el WhatsApp real de contacto (con código de país, sin +, sin espacios).
+    const WHATSAPP_NUMBER = "57XXXXXXXXXX";
+
+    function decodeBase64Unicode(str) {
+      try {
+        return decodeURIComponent(atob(str).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function getGuestName() {
+      const params = new URLSearchParams(window.location.search);
+
+      const possibleEncoded =
+        params.get('n') ||
+        params.get('guest') ||
+        params.get('invitado') ||
+        params.get('nombre');
+
+      const plainName =
+        params.get('name') ||
+        params.get('guestName') ||
+        params.get('invitadoNombre');
+
+      function normalizeBase64(value) {
+        if (!value) return value;
+        let normalized = value.replace(/-/g, '+').replace(/_/g, '/').trim();
+        const pad = normalized.length % 4;
+        if (pad) normalized += '='.repeat(4 - pad);
+        return normalized;
+      }
+
+      if (possibleEncoded) {
+        const decoded = decodeBase64Unicode(normalizeBase64(possibleEncoded));
+        if (decoded && decoded.trim()) return decoded.trim();
+      }
+
+      if (plainName && plainName.trim()) return plainName.trim();
+
+      return 'Invitado especial';
+    }
+
+    function updateCountdown() {
+      const eventDate = new Date('2026-09-12T19:00:00');
+      const now = new Date();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    function revealOnScroll() {
+      const items = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      items.forEach((item) => observer.observe(item));
+    }
+
+    function openInvitation() {
+      const overlay = document.getElementById('openOverlay');
+      const pageContent = document.getElementById('pageContent');
+
+      overlay.classList.add('hidden');
+      pageContent.classList.remove('pre-open');
+
+      requestAnimationFrame(() => {
+        pageContent.classList.add('opened');
+      });
+    }
+
+    function submitRSVP(event) {
+      event.preventDefault();
+
+      const form = document.getElementById('rsvpForm');
+      const status = document.getElementById('rsvpStatus');
+      const attendance = form.querySelector('input[name="attendance"]:checked');
+
+      if (!attendance) {
+        status.textContent = 'Selecciona si asistirás o no.';
+        return;
+      }
+
+      if (!WHATSAPP_NUMBER || WHATSAPP_NUMBER.includes('X')) {
+        status.textContent = 'Falta configurar el número de WhatsApp en el código.';
+        return;
+      }
+
+      const guestName = getGuestName();
+      const message = `Hola! Soy ${guestName}. Confirmo mi asistencia a los 15 años de Mariana: ${attendance.value}.`;
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+      status.textContent = 'Abriendo WhatsApp para enviar tu confirmación...';
+      window.open(waUrl, '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const resolvedGuestName = getGuestName();
+
+      const coverGuest = document.getElementById('coverGuestName');
+      const overlayGuest = document.getElementById('overlayGuestName');
+      const guestDisplay = document.getElementById('guestNameDisplay');
+      const rsvpForm = document.getElementById('rsvpForm');
+      const openBtn = document.getElementById('openInviteBtn');
+
+      if (coverGuest) coverGuest.textContent = resolvedGuestName;
+      if (overlayGuest) overlayGuest.textContent = resolvedGuestName;
+      if (guestDisplay) guestDisplay.textContent = resolvedGuestName;
+
+      if (openBtn) {
+        openBtn.addEventListener('click', openInvitation);
+      }
+
+      if (rsvpForm) {
+        rsvpForm.addEventListener('submit', submitRSVP);
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+      revealOnScroll();
+    });
+  </script>
+</body>
+</html>
