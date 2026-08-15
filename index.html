@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
   <style>
     :root {
-      --maroon-1: #3e0f09;
-      --maroon-2: #2a0906;
+      --maroon-1: #7a1211;
+      --maroon-2: #4c0c0b;
       --ivory-1: #fffaf0;
       --ivory-2: #fdf3e2;
       --gold-1: #f8ecc4;
@@ -40,8 +40,8 @@
       color: var(--ink);
       font-family: "Inter", sans-serif;
       background:
-        radial-gradient(ellipse 80% 42% at 50% 0%, rgba(150, 40, 25, 0.35), transparent 62%),
-        radial-gradient(ellipse 70% 42% at 50% 100%, rgba(10, 3, 2, 0.55), transparent 58%),
+        radial-gradient(ellipse 80% 42% at 50% 0%, rgba(215, 30, 35, 0.45), transparent 62%),
+        radial-gradient(ellipse 70% 42% at 50% 100%, rgba(15, 3, 4, 0.55), transparent 58%),
         var(--maroon-1);
       overflow-x: hidden;
       position: relative;
@@ -558,7 +558,7 @@
       justify-content: center;
       padding: 26px 20px;
       background:
-        radial-gradient(ellipse 80% 45% at 50% 0%, rgba(150, 40, 25, 0.35), transparent 60%),
+        radial-gradient(ellipse 80% 45% at 50% 0%, rgba(215, 30, 35, 0.45), transparent 60%),
         var(--maroon-1);
       transition: opacity 0.7s ease, visibility 0.7s ease;
     }
@@ -598,7 +598,7 @@
     }
 
     .open-card-wrap .rose-tl { top: 50%; left: -32px; transform: translateY(-50%); width: min(22vw, 96px); }
-    .open-card-wrap .rose-tr { top: 50%; right: -32px; transform: translateY(-50%); width: min(22vw, 96px); }
+    .open-card-wrap .rose-tr { top: 50%; right: -32px; transform: translateY(-50%) scaleX(-1); width: min(22vw, 96px); }
 
     .open-card {
       position: relative;
@@ -708,13 +708,13 @@
       overflow: hidden;
     }
 
-    .footer-frame .rose-bl { left: -20px; bottom: -14px; width: min(40vw, 190px); }
-    .footer-frame .rose-br { right: -20px; bottom: -14px; width: min(40vw, 190px); }
+    .footer-frame .rose-bl { left: -22px; bottom: -12px; width: min(32vw, 140px); }
+    .footer-frame .rose-br { right: -22px; bottom: -12px; width: min(32vw, 140px); transform: scaleX(-1); }
 
     .footer-signature {
       position: relative;
       z-index: 2;
-      padding: 0 58px;
+      padding: 0 102px;
     }
 
     .footer-name {
@@ -775,8 +775,10 @@
       .open-card-wrap .rose-tl, .open-card-wrap .rose-tr { width: min(18vw, 78px); }
       .open-card-wrap .rose-tl { left: -22px; }
       .open-card-wrap .rose-tr { right: -22px; }
-      .footer-frame .rose-bl, .footer-frame .rose-br { width: min(30vw, 120px); }
-      .footer-signature { padding: 0 42px; }
+      .footer-frame .rose-bl, .footer-frame .rose-br { width: min(27vw, 104px); }
+      .footer-frame .rose-bl { left: -14px; }
+      .footer-frame .rose-br { right: -14px; }
+      .footer-signature { padding: 0 76px; }
       .map-frame-wrap iframe { height: 236px; }
     }
 
@@ -810,8 +812,8 @@
       </div>
 
       <div class="open-card-wrap">
-        <img class="rose-corner rose-tl" src="assets/corner-top-left.png" alt="" aria-hidden="true">
-        <img class="rose-corner rose-tr" src="assets/corner-top-right.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-tl" src="assets/img/rosa.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-tr" src="assets/img/rosa.png" alt="" aria-hidden="true">
 
         <div class="open-card">
           <div class="open-title">Mis 15 años</div>
@@ -986,8 +988,8 @@
     </article>
 
     <div class="footer-frame fade-up">
-      <img class="rose-corner rose-bl" src="assets/corner-bottom-left.png" alt="" aria-hidden="true">
-      <img class="rose-corner rose-br" src="assets/corner-bottom-right.png" alt="" aria-hidden="true">
+      <img class="rose-corner rose-bl" src="assets/img/rosa2.png" alt="" aria-hidden="true">
+      <img class="rose-corner rose-br" src="assets/img/rosa2.png" alt="" aria-hidden="true">
       <div class="footer-signature">
         <div class="divider on-dark"><span class="gem"></span></div>
         <p class="footer-name">Mariana Arboleda Apolinar</p>
@@ -998,7 +1000,7 @@
 
   <script>
     // Reemplaza este número por el WhatsApp real de contacto (con código de país, sin +, sin espacios).
-    const WHATSAPP_NUMBER = "57XXXXXXXXXX";
+    const WHATSAPP_NUMBER = "573102366936";
 
     function decodeBase64Unicode(str) {
       try {
