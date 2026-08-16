@@ -559,8 +559,8 @@
       position: relative;
     }
 
-    .open-card-wrap .rose-tl { top: 50%; left: -32px; transform: translateY(-50%); width: min(22vw, 96px); }
-    .open-card-wrap .rose-tr { top: 50%; right: -32px; transform: translateY(-50%) scaleX(-1); width: min(22vw, 96px); }
+    .open-card-wrap .rose-bl { bottom: -16px; left: -20px; width: min(26vw, 112px); }
+    .open-card-wrap .rose-br { bottom: -16px; right: -20px; width: min(26vw, 112px); transform: scaleX(-1); }
 
     .open-card-wrap .rose-topL { top: -26px; left: 14px; width: min(19vw, 84px); transform: rotate(-14deg); z-index: 3; }
     .open-card-wrap .rose-topR { top: -26px; right: 14px; width: min(19vw, 84px); transform: rotate(14deg) scaleX(-1); z-index: 3; }
@@ -724,9 +724,9 @@
     }
 
     @media (max-width: 639px) {
-      .open-card-wrap .rose-tl, .open-card-wrap .rose-tr { width: min(18vw, 78px); }
-      .open-card-wrap .rose-tl { left: -22px; }
-      .open-card-wrap .rose-tr { right: -22px; }
+      .open-card-wrap .rose-bl, .open-card-wrap .rose-br { width: min(22vw, 90px); }
+      .open-card-wrap .rose-bl { left: -14px; }
+      .open-card-wrap .rose-br { right: -14px; }
       .footer-frame .rose-bl, .footer-frame .rose-br { width: min(27vw, 104px); }
       .footer-frame .rose-bl { left: -14px; }
       .footer-frame .rose-br { right: -14px; }
@@ -762,8 +762,8 @@
       <div class="open-card-wrap">
         <img class="rose-corner rose-topL" src="assets/img/rosa-blanca.png" alt="" aria-hidden="true">
         <img class="rose-corner rose-topR" src="assets/img/rosa-blanca.png" alt="" aria-hidden="true">
-        <img class="rose-corner rose-tl" src="assets/img/rosa.png" alt="" aria-hidden="true">
-        <img class="rose-corner rose-tr" src="assets/img/rosa.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-bl" src="assets/img/rosa.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-br" src="assets/img/rosa.png" alt="" aria-hidden="true">
 
         <div class="open-card">
           <div class="open-title">Mis 15 años</div>
