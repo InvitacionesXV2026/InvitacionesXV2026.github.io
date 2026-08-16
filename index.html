@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
   <style>
     :root {
-      --maroon-1: #7a1211;
-      --maroon-2: #4c0c0b;
+      --maroon-1: #a4121c;
+      --maroon-2: #6e0b12;
       --ivory-1: #fffaf0;
       --ivory-2: #fdf3e2;
       --gold-1: #f8ecc4;
@@ -39,10 +39,14 @@
       min-height: 100vh;
       color: var(--ink);
       font-family: "Inter", sans-serif;
-      background:
-        radial-gradient(ellipse 80% 42% at 50% 0%, rgba(215, 30, 35, 0.45), transparent 62%),
-        radial-gradient(ellipse 70% 42% at 50% 100%, rgba(15, 3, 4, 0.55), transparent 58%),
-        var(--maroon-1);
+      background-image:
+        radial-gradient(ellipse 80% 42% at 50% 0%, rgba(215, 30, 35, 0.35), transparent 62%),
+        radial-gradient(ellipse 70% 42% at 50% 100%, rgba(15, 3, 4, 0.45), transparent 58%),
+        url('assets/img/fondo2.jpeg');
+      background-repeat: no-repeat, no-repeat, repeat-y;
+      background-position: top center, top center, top center;
+      background-size: 100% 100%, 100% 100%, 100% auto;
+      background-color: var(--maroon-1);
       overflow-x: hidden;
       position: relative;
     }
@@ -79,7 +83,7 @@
       width: 100%;
       max-width: 590px;
       margin: 0 auto;
-      padding: 0 14px 30px;
+      padding: 34px 22px 30px;
     }
 
     /* ---------- Divider (replaces the star-row ornament) ---------- */
@@ -113,26 +117,18 @@
       box-shadow: 0 0 9px rgba(202, 162, 74, 0.75);
     }
 
-    .divider.on-dark::before { background: linear-gradient(90deg, transparent, rgba(230, 198, 116, 0.55), transparent); }
-
-    /* ---------- Mask on the dark maroon canvas ---------- */
-    .mask-hero {
-      padding: 30px 10px 4px;
-      text-align: center;
+    /* ---------- Mask inside the invitation card ---------- */
+    .card-mask {
       position: relative;
-    }
-
-    .mask-hero-frame {
-      position: relative;
-      width: min(100%, 560px);
-      margin: 0 auto -8px;
+      width: min(58%, 260px);
+      margin: 0 auto 6px;
     }
 
     .mask-glow {
       position: absolute;
       inset: 8% 4%;
-      background: radial-gradient(circle, rgba(230, 198, 116, 0.30), transparent 68%);
-      filter: blur(26px);
+      background: radial-gradient(circle, rgba(202, 162, 74, 0.28), transparent 68%);
+      filter: blur(20px);
       z-index: 0;
       animation: glowHalo 5s ease-in-out infinite;
     }
@@ -142,42 +138,8 @@
       z-index: 1;
       width: 100%;
       display: block;
-      filter: drop-shadow(0 16px 30px rgba(10, 3, 2, 0.5));
+      filter: drop-shadow(0 10px 18px rgba(122, 21, 34, 0.28));
       animation: floatMask 5.2s ease-in-out infinite;
-    }
-
-    .scroll-cue {
-      margin: 4px auto 0;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--gold-2);
-      font-size: 0.66rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .scroll-cue .mouse {
-      width: 26px;
-      height: 42px;
-      border-radius: 999px;
-      border: 1px solid rgba(230, 198, 116, 0.6);
-      position: relative;
-    }
-
-    .scroll-cue .mouse::before {
-      content: "";
-      position: absolute;
-      top: 7px;
-      left: 50%;
-      width: 4px;
-      height: 8px;
-      transform: translateX(-50%);
-      border-radius: 999px;
-      background: rgba(230, 198, 116, 0.85);
-      animation: scrollDot 1.6s ease-in-out infinite;
     }
 
     /* ---------- Content card ---------- */
@@ -600,6 +562,9 @@
     .open-card-wrap .rose-tl { top: 50%; left: -32px; transform: translateY(-50%); width: min(22vw, 96px); }
     .open-card-wrap .rose-tr { top: 50%; right: -32px; transform: translateY(-50%) scaleX(-1); width: min(22vw, 96px); }
 
+    .open-card-wrap .rose-topL { top: -26px; left: 14px; width: min(19vw, 84px); transform: rotate(-14deg); z-index: 3; }
+    .open-card-wrap .rose-topR { top: -26px; right: 14px; width: min(19vw, 84px); transform: rotate(14deg) scaleX(-1); z-index: 3; }
+
     .open-card {
       position: relative;
       z-index: 1;
@@ -692,10 +657,6 @@
       filter: blur(0);
     }
 
-    .page-content.opened .mask-hero {
-      animation: stageRise 1s cubic-bezier(.22,1,.36,1) both;
-    }
-
     .page-content.opened .paper {
       animation: paperLift 1.08s cubic-bezier(.22,1,.36,1) both;
     }
@@ -721,8 +682,8 @@
       margin: 0;
       font-family: "Alex Brush", cursive;
       font-size: clamp(1.7rem, 7vw, 3.1rem);
-      color: var(--gold-1);
-      text-shadow: 0 1px 10px rgba(0,0,0,0.4);
+      color: var(--red-deep);
+      text-shadow: 0 1px 8px rgba(255, 253, 246, 0.6);
     }
 
     .footer-sub {
@@ -731,17 +692,12 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-size: 0.78rem;
-      color: var(--gold-2);
+      color: var(--label);
     }
 
     @keyframes cardFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
-    }
-
-    @keyframes stageRise {
-      0% { opacity: 0; transform: translateY(30px) scale(0.985); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     @keyframes paperLift {
@@ -764,14 +720,7 @@
       50% { transform: translateY(-7px); }
     }
 
-    @keyframes scrollDot {
-      0% { opacity: 0; transform: translateX(-50%) translateY(0); }
-      25% { opacity: 1; }
-      100% { opacity: 0; transform: translateX(-50%) translateY(14px); }
-    }
-
     @media (max-width: 639px) {
-      .mask-hero { padding-top: 20px; }
       .open-card-wrap .rose-tl, .open-card-wrap .rose-tr { width: min(18vw, 78px); }
       .open-card-wrap .rose-tl { left: -22px; }
       .open-card-wrap .rose-tr { right: -22px; }
@@ -783,7 +732,7 @@
     }
 
     @media (min-width: 640px) {
-      .shell { max-width: 760px; padding: 0 22px 50px; }
+      .shell { max-width: 760px; padding: 46px 32px 50px; }
       .paper { padding: 34px 30px 36px; }
     }
 
@@ -807,11 +756,9 @@
 
   <div id="openOverlay" class="open-overlay">
     <div class="open-frame">
-      <div class="open-mask-wrap">
-        <img src="assets/mask.png" alt="" aria-hidden="true">
-      </div>
-
       <div class="open-card-wrap">
+        <img class="rose-corner rose-topL" src="assets/img/rosa-blanca.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-topR" src="assets/img/rosa-blanca.png" alt="" aria-hidden="true">
         <img class="rose-corner rose-tl" src="assets/img/rosa.png" alt="" aria-hidden="true">
         <img class="rose-corner rose-tr" src="assets/img/rosa.png" alt="" aria-hidden="true">
 
@@ -829,17 +776,6 @@
   </div>
 
   <main id="pageContent" class="shell page-content pre-open">
-    <section class="mask-hero fade-up">
-      <div class="mask-hero-frame">
-        <div class="mask-glow" aria-hidden="true"></div>
-        <img class="mask-hero-img" src="assets/mask.png" alt="Antifaz de gala" />
-      </div>
-      <div class="scroll-cue" aria-hidden="true">
-        <div class="mouse"></div>
-        <span>Desliza</span>
-      </div>
-    </section>
-
     <article class="paper">
       <span class="card-corner tl"></span>
       <span class="card-corner tr"></span>
@@ -847,6 +783,11 @@
       <span class="card-corner br"></span>
 
       <div class="inner">
+        <div class="card-mask">
+          <div class="mask-glow" aria-hidden="true"></div>
+          <img class="mask-hero-img" src="assets/mask-gold.png" alt="Antifaz dorado" />
+        </div>
+
         <section class="fade-up" style="text-align:center;">
           <div class="card-kicker">Mis 15 años</div>
           <h1 class="name">
@@ -991,7 +932,7 @@
       <img class="rose-corner rose-bl" src="assets/img/rosa2.png" alt="" aria-hidden="true">
       <img class="rose-corner rose-br" src="assets/img/rosa2.png" alt="" aria-hidden="true">
       <div class="footer-signature">
-        <div class="divider on-dark"><span class="gem"></span></div>
+        <div class="divider"><span class="gem"></span></div>
         <p class="footer-name">Mariana Arboleda Apolinar</p>
         <p class="footer-sub">Mis 15 años · 12 de septiembre de 2026</p>
       </div>
