@@ -759,6 +759,8 @@
   </style>
 </head>
 <body class="pre-open-state">
+  <audio id="bgMusic" src="assets/fondo.mp3" loop preload="auto"></audio>
+
   <div class="moving-bg" aria-hidden="true">
     <span class="sparkle s1"></span>
     <span class="sparkle s2"></span>
@@ -1052,6 +1054,12 @@
       requestAnimationFrame(() => {
         pageContent.classList.add('opened');
       });
+
+      const bgMusic = document.getElementById('bgMusic');
+      if (bgMusic) {
+        bgMusic.volume = 0.6;
+        bgMusic.play().catch(() => {});
+      }
     }
 
     function submitRSVP(event) {
