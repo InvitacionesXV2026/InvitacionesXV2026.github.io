@@ -1079,8 +1079,9 @@
         return;
       }
 
-      const guestName = getGuestName() || 'Invitado especial';
-      const message = `Hola! Soy ${guestName}. Confirmo mi asistencia a los 15 años de Mariana: ${attendance.value}.`;
+      const guestName = getGuestName();
+      const greeting = guestName ? `Hola! Soy ${guestName}. ` : 'Hola! ';
+      const message = `${greeting}Confirmo mi asistencia a los 15 años de Mariana: ${attendance.value}.`;
       const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
       status.textContent = 'Abriendo WhatsApp para enviar tu confirmación...';
