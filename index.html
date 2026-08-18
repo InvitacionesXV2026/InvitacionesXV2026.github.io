@@ -263,6 +263,14 @@
       color: var(--red-1);
     }
 
+    .hero-closing-name {
+      display: block;
+      text-align: center;
+      margin-top: 6px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
     .section {
       padding: 2px 0;
       text-align: center;
@@ -562,8 +570,8 @@
     .open-card-wrap .rose-bl { bottom: -16px; left: -20px; width: min(26vw, 112px); }
     .open-card-wrap .rose-br { bottom: -16px; right: -20px; width: min(26vw, 112px); transform: scaleX(-1); }
 
-    .open-card-wrap .rose-topL { top: -30px; left: 8px; width: min(27vw, 118px); transform: rotate(-14deg); z-index: 3; }
-    .open-card-wrap .rose-topR { top: -30px; right: 8px; width: min(27vw, 118px); transform: rotate(14deg) scaleX(-1); z-index: 3; }
+    .open-card-wrap .rose-topL { top: -30px; left: -16px; width: min(27vw, 118px); transform: rotate(-14deg); z-index: 3; }
+    .open-card-wrap .rose-topR { top: -30px; right: -16px; width: min(27vw, 118px); transform: rotate(14deg) scaleX(-1); z-index: 3; }
 
     .open-card {
       position: relative;
@@ -667,7 +675,8 @@
     /* ---------- Footer signature with rose corners ---------- */
     .footer-frame {
       position: relative;
-      padding: 44px 12px 12px;
+      margin-top: 8px;
+      padding: 28px 12px 4px;
       text-align: center;
       overflow: hidden;
     }
@@ -796,7 +805,6 @@
           <h1 class="name">
             <span class="cap">M</span>ariana
           </h1>
-          <div class="full-name">Mariana Arboleda Apolinar</div>
 
           <div id="coverGuestLabel" class="cover-invitee-label">Invitación para</div>
           <div id="coverGuestName" class="cover-invitee-name">Invitado especial</div>
@@ -805,7 +813,8 @@
             Érase una vez... en un reino donde la elegancia es eterna y los sueños se convierten en memorias inolvidables, una joven dama está por abrir las puertas de una nueva etapa en su historia. Esta noche, los salones se visten de gala, las máscaras guardan el misterio y la música da vida a una celebración digna de la realeza.
           </p>
           <p class="hero-closing">
-            Liz Apolinar tiene el gusto de invitarte a celebrar los 15 años de su hija.
+            Liz Apolinar tiene el gusto de invitarte a celebrar los 15 años de su hija:
+            <span class="hero-closing-name">Mariana Arboleda Apolinar</span>
           </p>
         </section>
 
@@ -928,18 +937,18 @@
             </div>
           </form>
         </section>
+
+        <div class="footer-frame fade-up">
+          <img class="rose-corner rose-bl" src="assets/img/rosa2.png" alt="" aria-hidden="true">
+          <img class="rose-corner rose-br" src="assets/img/rosa2.png" alt="" aria-hidden="true">
+          <div class="footer-signature">
+            <div class="divider"><span class="gem"></span></div>
+            <p class="footer-name">Mariana Arboleda Apolinar</p>
+            <p class="footer-sub">Mis 15 años · 12 de septiembre de 2026</p>
+          </div>
+        </div>
       </div>
     </article>
-
-    <div class="footer-frame fade-up">
-      <img class="rose-corner rose-bl" src="assets/img/rosa2.png" alt="" aria-hidden="true">
-      <img class="rose-corner rose-br" src="assets/img/rosa2.png" alt="" aria-hidden="true">
-      <div class="footer-signature">
-        <div class="divider"><span class="gem"></span></div>
-        <p class="footer-name">Mariana Arboleda Apolinar</p>
-        <p class="footer-sub">Mis 15 años · 12 de septiembre de 2026</p>
-      </div>
-    </div>
   </main>
 
   <script>
@@ -978,9 +987,16 @@
         return normalized;
       }
 
-      if (possibleEncoded) {
+      function looksLikeName(value) {
+        return /^[\p{L}\p{N}\s'.-]+$/u.test(value);
+      }
+
+      if (possibleEncoded && possibleEncoded.trim()) {
         const decoded = decodeBase64Unicode(normalizeBase64(possibleEncoded));
-        if (decoded && decoded.trim()) return decoded.trim();
+        if (decoded && decoded.trim() && looksLikeName(decoded.trim())) {
+          return decoded.trim();
+        }
+        return possibleEncoded.trim();
       }
 
       if (plainName && plainName.trim()) return plainName.trim();
