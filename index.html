@@ -562,8 +562,8 @@
     .open-card-wrap .rose-bl { bottom: -16px; left: -20px; width: min(26vw, 112px); }
     .open-card-wrap .rose-br { bottom: -16px; right: -20px; width: min(26vw, 112px); transform: scaleX(-1); }
 
-    .open-card-wrap .rose-topL { top: -26px; left: 14px; width: min(19vw, 84px); transform: rotate(-14deg); z-index: 3; }
-    .open-card-wrap .rose-topR { top: -26px; right: 14px; width: min(19vw, 84px); transform: rotate(14deg) scaleX(-1); z-index: 3; }
+    .open-card-wrap .rose-topL { top: -30px; left: 8px; width: min(27vw, 118px); transform: rotate(-14deg); z-index: 3; }
+    .open-card-wrap .rose-topR { top: -30px; right: 8px; width: min(27vw, 118px); transform: rotate(14deg) scaleX(-1); z-index: 3; }
 
     .open-card {
       position: relative;
@@ -760,8 +760,8 @@
   <div id="openOverlay" class="open-overlay">
     <div class="open-frame">
       <div class="open-card-wrap">
-        <img class="rose-corner rose-topL" src="assets/img/rosa-blanca.png" alt="" aria-hidden="true">
-        <img class="rose-corner rose-topR" src="assets/img/rosa-blanca.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-topL" src="assets/img/Rosadorada.png" alt="" aria-hidden="true">
+        <img class="rose-corner rose-topR" src="assets/img/Rosadorada.png" alt="" aria-hidden="true">
         <img class="rose-corner rose-bl" src="assets/img/rosa.png" alt="" aria-hidden="true">
         <img class="rose-corner rose-br" src="assets/img/rosa.png" alt="" aria-hidden="true">
 
@@ -770,7 +770,7 @@
           <div class="open-name">
             <span class="cap">M</span>ariana
           </div>
-          <div class="open-invitee-label">Invitación para</div>
+          <div id="overlayGuestLabel" class="open-invitee-label">Invitación para</div>
           <div id="overlayGuestName" class="open-invitee-name">Invitado especial</div>
           <button id="openInviteBtn" class="open-btn" type="button">Abrir invitación</button>
         </div>
@@ -798,14 +798,14 @@
           </h1>
           <div class="full-name">Mariana Arboleda Apolinar</div>
 
-          <div class="cover-invitee-label">Invitación para</div>
+          <div id="coverGuestLabel" class="cover-invitee-label">Invitación para</div>
           <div id="coverGuestName" class="cover-invitee-name">Invitado especial</div>
 
           <p class="hero-text">
             Érase una vez... en un reino donde la elegancia es eterna y los sueños se convierten en memorias inolvidables, una joven dama está por abrir las puertas de una nueva etapa en su historia. Esta noche, los salones se visten de gala, las máscaras guardan el misterio y la música da vida a una celebración digna de la realeza.
           </p>
           <p class="hero-closing">
-            Con todo su cariño, sus padres te invitan a acompañarla y celebrar juntos esta noche tan especial.
+            Liz Apolinar tiene el gusto de invitarte a celebrar los 15 años de su hija.
           </p>
         </section>
 
@@ -905,7 +905,7 @@
 
           <form id="rsvpForm">
             <div class="rsvp-confirm-box">
-              <div class="rsvp-name-line">
+              <div id="rsvpNameLine" class="rsvp-name-line">
                 <strong id="guestNameDisplay">Invitado especial</strong>
               </div>
               <div class="rsvp-question">
@@ -985,7 +985,7 @@
 
       if (plainName && plainName.trim()) return plainName.trim();
 
-      return 'Invitado especial';
+      return null;
     }
 
     function updateCountdown() {
@@ -1055,7 +1055,7 @@
         return;
       }
 
-      const guestName = getGuestName();
+      const guestName = getGuestName() || 'Invitado especial';
       const message = `Hola! Soy ${guestName}. Confirmo mi asistencia a los 15 años de Mariana: ${attendance.value}.`;
       const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
@@ -1067,14 +1067,25 @@
       const resolvedGuestName = getGuestName();
 
       const coverGuest = document.getElementById('coverGuestName');
+      const coverGuestLabel = document.getElementById('coverGuestLabel');
       const overlayGuest = document.getElementById('overlayGuestName');
+      const overlayGuestLabel = document.getElementById('overlayGuestLabel');
       const guestDisplay = document.getElementById('guestNameDisplay');
+      const rsvpNameLine = document.getElementById('rsvpNameLine');
       const rsvpForm = document.getElementById('rsvpForm');
       const openBtn = document.getElementById('openInviteBtn');
 
-      if (coverGuest) coverGuest.textContent = resolvedGuestName;
-      if (overlayGuest) overlayGuest.textContent = resolvedGuestName;
-      if (guestDisplay) guestDisplay.textContent = resolvedGuestName;
+      if (resolvedGuestName) {
+        if (coverGuest) coverGuest.textContent = resolvedGuestName;
+        if (overlayGuest) overlayGuest.textContent = resolvedGuestName;
+        if (guestDisplay) guestDisplay.textContent = resolvedGuestName;
+      } else {
+        if (coverGuest) coverGuest.remove();
+        if (coverGuestLabel) coverGuestLabel.remove();
+        if (overlayGuest) overlayGuest.remove();
+        if (overlayGuestLabel) overlayGuestLabel.remove();
+        if (rsvpNameLine) rsvpNameLine.remove();
+      }
 
       if (openBtn) {
         openBtn.addEventListener('click', openInvitation);
